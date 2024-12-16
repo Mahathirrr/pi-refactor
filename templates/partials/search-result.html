@@ -1,0 +1,33 @@
+{{/* templates/partials/search-result.html */}}
+{{define "search-result"}}
+<div class="search-result">
+    <div class="site-info">
+        <img src="{{.Favicon}}" alt="" class="site-favicon">
+        <div class="url-info">
+            <div class="site-name">
+                {{if hasPrefix .URL "https://artikel.rumah123.com/"}}Rumah123
+                {{else if hasPrefix .URL "https://propertiterkini.com/"}}Properti Terkini
+                {{else if hasPrefix .URL "https://propertyandthecity.com/"}}Property and The City
+                {{end}}
+            </div>
+            <div class="breadcrumb-path">
+                {{trimURLPath .URL}}
+            </div>
+        </div>
+    </div>
+
+    <h3 class="search-result-title">
+        <a href="{{.URL}}" class="search-result-link" target="_blank" rel="noopener">
+            {{.Title}}
+        </a>
+    </h3>
+
+    <div class="result-content">
+        {{.HighlightedContent}}
+    </div>
+
+    <div class="metadata">
+        <span class="score-info">Relevance Score: {{printf "%.2f" .Score}}</span>
+    </div>
+</div>
+{{end}}

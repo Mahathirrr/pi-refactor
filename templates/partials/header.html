@@ -1,0 +1,42 @@
+{{/* templates/partials/header.html */}}
+{{define "header"}}
+<header class="header-wrapper">
+    <div class="header-content">
+        <a href="/" class="search-logo-small">
+            <span>Q</span><span>u</span><span>e</span><span>s</span><span>t</span><span>r</span><span>a</span>
+        </a>
+        
+        {{if ne .page "home"}}
+        <div class="search-container">
+            <form action="/search" method="get">
+                <input type="text" 
+                       name="q" 
+                       value="{{.query}}"
+                       class="search-box"
+                       autocomplete="off"
+                       required>
+                <button type="submit" class="search-icon">
+                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+                <input type="hidden" name="method" value="{{.method}}">
+            </form>
+        </div>
+        {{end}}
+    </div>
+    
+    {{if eq .page "results"}}
+    <nav class="nav-bar">
+        <a href="/search?q={{.query}}&method=cosine" 
+           class="nav-item {{if eq .method "cosine"}}active{{end}}">
+            Cosine
+        </a>
+        <a href="/search?q={{.query}}&method=jaccard" 
+           class="nav-item {{if eq .method "jaccard"}}active{{end}}">
+            Jaccard
+        </a>
+    </nav>
+    {{end}}
+</header>
+{{end}}

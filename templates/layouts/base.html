@@ -1,0 +1,40 @@
+{{/* templates/layouts/base.html */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{template "title" .}}</title>
+    
+    {{/* Shared Meta Tags */}}
+    <meta name="description" content="Real Estate Property Search Engine">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+    
+    {{/* Favicon Configuration */}}
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+    
+    {{/* Fonts */}}
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;500&display=swap" rel="stylesheet">
+    
+    {{/* Shared Styles */}}
+    {{template "styles" .}}
+    
+    {{/* Page Specific Styles */}}
+    {{block "page-styles" .}}{{end}}
+</head>
+<body class="min-h-screen bg-white">
+    {{template "header" .}}
+    
+    <main>
+        {{template "content" .}}
+    </main>
+    
+    {{template "scripts" .}}
+    {{block "page-scripts" .}}{{end}}
+</body>
+</html>

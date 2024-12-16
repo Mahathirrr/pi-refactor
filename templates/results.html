@@ -1,0 +1,29 @@
+{{/* templates/results.html */}}
+{{template "base" .}}
+
+{{define "title"}}Search Results - {{.query}}{{end}}
+
+{{define "content"}}
+<div class="main-content">
+    {{if .results}}
+        <div class="result-stats">
+            About {{.totalResults}} results (Page {{.currentPage}} of {{.totalPages}})
+        </div>
+
+        {{range .results}}
+            {{template "search-result" .}}
+        {{end}}
+
+        {{template "pagination" .}}
+    {{else}}
+        <div class="no-results">
+            <p class="no-results__title">
+                No results found for <strong>"{{.query}}"</strong>
+            </p>
+            <p class="no-results__suggestion">
+                Try different keywords or check your spelling
+            </p>
+        </div>
+    {{end}}
+</div>
+{{end}}

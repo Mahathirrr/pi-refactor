@@ -1,0 +1,41 @@
+{{/* templates/partials/pagination.html */}}
+{{define "pagination"}}
+{{if gt .totalPages 1}}
+<div class="pagination">
+    <div class="pagination-container">
+        {{if .showPrevious}}
+        <a href="/search?q={{.query}}&method={{.method}}&page={{.previousPage}}" 
+           aria-label="Previous page">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" fill="#1a73e8"/>
+            </svg>
+        </a>
+        {{end}}
+        
+        {{$currentPage := .currentPage}}
+        {{$totalPages := .totalPages}}
+        
+        {{if le .totalPages 10}}
+            {{range $i := iterate 1 .totalPages}}
+                {{if eq $i $currentPage}}
+                    <span class="current">{{$i}}</span>
+                {{else}}
+                    <a href="/search?q={{$.query}}&method={{$.method}}&page={{$i}}">{{$i}}</a>
+                {{end}}
+            {{end}}
+        {{else}}
+            {{template "pagination-extended" .}}
+        {{end}}
+        
+        {{if .showNext}}
+        <a href="/search?q={{.query}}&method={{.method}}&page={{.nextPage}}" 
+           aria-label="Next page">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" fill="#1a73e8"/>
+            </svg>
+        </a>
+        {{end}}
+    </div>
+</div>
+{{end}}
+{{end}}
